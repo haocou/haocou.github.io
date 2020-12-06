@@ -30,8 +30,11 @@
 <meta property="og:description" content="This tutorials is for rigid body motion, including rotation, rigid-body motion and corresponding velocity. Finally the wrench is given in this tutorials.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://haocou.github.io/images/rigidbody/rotationExp.png">
+<meta property="og:image" content="https://haocou.github.io/images/rigidbody/screw_motions.png">
+<meta property="og:image" content="https://haocou.github.io/images/rigidbody/generalized_screw_motoin.png">
+<meta property="og:image" content="https://haocou.github.io/images/rigidbody/wrenches_transformation.png">
 <meta property="article:published_time" content="2020-11-27T02:09:22.000Z">
-<meta property="article:modified_time" content="2020-12-04T11:35:49.367Z">
+<meta property="article:modified_time" content="2020-12-06T08:52:07.716Z">
 <meta property="article:author" content="Jack Chou">
 <meta property="article:tag" content="robot">
 <meta name="twitter:card" content="summary">
@@ -223,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-04 19:35:49" itemprop="dateModified" datetime="2020-12-04T19:35:49+08:00">2020-12-04</time>
+                <time title="Modified: 2020-12-06 16:52:07" itemprop="dateModified" datetime="2020-12-06T16:52:07+08:00">2020-12-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -467,9 +470,172 @@ A=(I-e^{\widehat\omega\theta})\widehat\omega+\omega\omega^T\theta
 \]</span></p></li>
 </ul>
 <h2 id="screws-a-geometric-description-of-twists">Screws: a geometric description of twists</h2>
+<figure>
+<img src="/images/rigidbody/screw_motions.png" alt="screw_motions" /><figcaption aria-hidden="true">screw_motions</figcaption>
+</figure>
+<figure>
+<img src="/images/rigidbody/generalized_screw_motoin.png" alt="generalized_screw_motoin" /><figcaption aria-hidden="true">generalized_screw_motoin</figcaption>
+</figure>
 <p><em>Lemma: Chasles theory. Every rigid body motion can be realized by a rotation about an axis combined with a translation parallel to that axis.</em></p>
+<p>To compute the rigid body transformation associated with a screw., we analyze the motion of a point <span class="math inline">\(p\in\mathbb R^3\)</span>, as shown in Figure. The final location of the point is given by <span class="math display">\[
+gp=q+e^{\widehat\omega\theta}(p-q)+h\theta\omega
+\]</span> where <span class="math inline">\(h\)</span> is pitch, and <span class="math inline">\(h=d/\theta\)</span>. This equation can be in homogeneous coordinates, <span class="math display">\[
+g\left[               
+  \begin{array}{ccc}   
+    p\\  
+    1 \\
+  \end{array}
+\right]
+=\left[               
+  \begin{array}{ccc}   
+    e^{\widehat\omega\theta} &amp;&amp; (I-e^{\widehat\omega\theta})q+h\theta\omega \\  
+    0 &amp;&amp; 1 \\
+  \end{array}
+\right]
+\left[               
+  \begin{array}{ccc}   
+    p  \\  
+    1 \\
+  \end{array}
+\right]
+\]</span> where <span class="math inline">\(q\)</span> is any point in axis.</p>
+<p>According to the equation of Twist to <span class="math inline">\(SE(3)\)</span>, the twist of screw motion is defined as</p>
+<ul>
+<li><em>Case 1</em> <span class="math inline">\((h=\infty)\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+\widehat\xi=\left[               
+  \begin{array}{ccc}   
+    0 &amp;&amp; v \\  
+    0 &amp;&amp; 0 \\
+  \end{array}
+\right]
+\]</span></p>
+<ul>
+<li><em>Case 2</em> <span class="math inline">\((h finite)\)</span>. <span class="math display">\[
+\widehat\xi=\left[               
+  \begin{array}{ccc}   
+    \widehat\omega &amp;&amp; -\omega\times q+h\omega \\  
+    0 &amp;&amp; 0 \\
+  \end{array}
+\right]
+\]</span></li>
+</ul>
 <h1 id="velocity-of-a-rigid-body">Velocity of a Rigid Body</h1>
-<h1 id="wrenches">wrenches</h1>
+<p>In this section, the velocity of a rigid body whose motion is given by <span class="math inline">\(g(t)\)</span>, and is a curve parameterized by time <span class="math inline">\(t\)</span> in <span class="math inline">\(SE(3)\)</span>, is formulated. As for the Euclidean space, the velocity is obvious to be solved. But, the rigid body motion is in special group space: <span class="math inline">\(\dot g(t)\notin SE(3)\)</span> and <span class="math inline">\(\dot g(t)\notin se(3)\)</span>.</p>
+<h2 id="rotation-velocity">Rotation velocity</h2>
+<h3 id="derivate-of-rotation">Derivate of Rotation</h3>
+<p>From the properties of rotation matrix,<span class="math inline">\(R(t)R(t)^T=I\)</span>, taking the derivative of parameter t, we obtained the following equation <span class="math display">\[
+\dot R R^T+R\dot R^T=0 \Rightarrow \dot R R^T=-(\dot R R^T)^T
+\]</span> The term <span class="math inline">\(\dot R R^T\)</span> is a skew matrix, defined as <span class="math inline">\(\widehat\omega\)</span>.</p>
+<h3 id="velocity-of-rotation">Velocity of rotation</h3>
+<p>We know that a vector <span class="math inline">\(q_a,q_b\in\mathbb{R^3}\)</span> is expressed in frame <span class="math inline">\({a},{b}\)</span> respectively. By applying the rotation matrix, the equation is established <span class="math display">\[
+q_a(t)=R_{ab}(t)q_b
+\]</span> Now, taking derivative of time <span class="math inline">\(t\)</span>, the rotation velocity is acquired <span class="math display">\[
+v^a=\frac{d}{dt}q_a(t)=\dot R_{ab}(t)q_b=\dot R_{ab}R_{ab}^TR_{ab}q_b=\dot R_{ab}R_{ab}^Tq_a
+\]</span> combining with rotation derivation <span class="math inline">\(\widehat\omega_{ab}^s=\dot R_{ab}R_{ab}^T\)</span> <span class="math display">\[
+v^a=\widehat\omega_{ab}^s q_a=\omega_{ab}^s \times q_a
+\]</span> where <span class="math inline">\(\widehat\omega_{ab}^s\)</span> is expressed in static frame (usually in base frame).</p>
+<hr />
+<p><strong>Velocity in body frame</strong></p>
+<p>Define <span class="math inline">\(\widehat\omega_{ab}^b=R_{ab}^T\dot R_{ab}\)</span>, then <span class="math inline">\(v^b=R_{ab}^Tv^a=\omega_{ab}^b \times q_b\)</span></p>
+<p><strong>transformation between frames</strong></p>
+<p>From the definition of <span class="math inline">\(\omega_{ab}\)</span> in static and body frame, the following formula holds <span class="math display">\[
+\widehat\omega_{ab}^b=R_{ab}^T\widehat\omega_{ab}^sR_{ab}
+\]</span> {formulation connection} or in vector space <span class="math display">\[
+\omega_{ab}^b=R_{ab}^T\omega_{ab}^s
+\]</span> where <span class="math inline">\(\widehat\omega_{ab}\in\mathbb{R^{4\times 4}}, \omega_{ab}\in\mathbb R^3\)</span>.</p>
+<h2 id="rigid-body-velocity">Rigid body velocity</h2>
+<p>Similar to the process of rotation velocity, the rigid body motion in <span class="math inline">\(SE(3)\)</span>, <span class="math inline">\(g_{ab}\)</span>, <span class="math inline">\(q_a(t)=g_{ab}(t)q_b\)</span>. The velocity is obtained through derivation with respect to time <span class="math inline">\(t\)</span>. <span class="math display">\[
+v^a=\frac{d}{dt}q_a(t)=\dot g_{ab}(t)q_b=\dot g_{ab}g_{ab}^Tg_{ab}q_b=\dot g_{ab}g_{ab}^Tq_a
+\]</span> Define <span class="math inline">\(\widehat v_{ab}^s=\dot g_{ab} g_{ab}^{-1}\)</span>, which has the matrix form <span class="math display">\[
+\dot g_{ab} g_{ab}^{-1}=\left[               
+  \begin{array}{ccc}   
+    \widehat\omega_{ab}^s &amp;&amp; -\omega_{ab}^s\times p_{ab}+\dot p_{ab} \\  
+    0 &amp;&amp; 0 \\
+  \end{array}
+\right]=\left[               
+  \begin{array}{ccc}   
+    \widehat\omega_{ab}^s &amp;&amp; v_{ab}^s \\  
+    0 &amp;&amp; 0 \\
+  \end{array}
+\right]
+\]</span></p>
+<p><span class="math display">\[
+v_{ab}^s=\left[               
+  \begin{array}{ccc}   
+    v_{ab}^s \\  
+    \omega_{ab}^s \\
+  \end{array}
+\right]
+=\left[               
+  \begin{array}{ccc}   
+   -\omega_{ab}^s\times p_{ab}+\dot p_{ab} \\  
+    (\dot R_{ab}R_{ab}^T)^{\vee} \\
+  \end{array}
+\right]
+\]</span></p>
+<p><strong>velocity expressed in body frame</strong> <span class="math display">\[
+v_{qb}=g_{ab}^{-1}v_{qa}=g_{ab}^{-1}\dot g_{ab}q_b=\widehat v_{ab}^bq_b
+\]</span> <strong>transformation between body and static frame</strong> <span class="math display">\[
+\widehat v_{ab}^s=\dot g_{ab} g_{ab}^{-1}=g_{ab}g_{ab}^{-1}\dot g_{ab} g_{ab}^{-1}=g_{ab} \widehat v_{ab}^b g_{ab}^{-1}
+\]</span> using the Adjoint to express in vector form <span class="math display">\[
+v_{ab}^s=\left[               
+  \begin{array}{ccc}   
+    v_{ab}^s \\  
+    \omega_{ab}^s \\
+  \end{array}
+\right]=
+\left[               
+  \begin{array}{ccc}   
+    R_{ab}^s &amp;&amp; \widehat p_{ab}R_{ab}\\  
+    0 &amp;&amp; R_{ab}\\
+  \end{array}
+\right]v_{ab}^b
+\]</span> <em>Definition of Adjoint mapping:</em> <span class="math display">\[
+Ad_g\triangleq \left[               
+  \begin{array}{ccc}   
+    R &amp;&amp; \widehat p R \\  
+    0 &amp;&amp; R \\
+  \end{array}
+\right] \in \mathbb{R^{6\times 6}}, for\ SE(3)\ motion\ g=(p,R)
+\]</span> which has the following properities <span class="math display">\[
+\operatorname{Ad}_{g}^{-1}=\left[\begin{array}{cc}
+R^{T} &amp; -\left(R^{T} p\right)^{\wedge} R^{T} \\
+0 &amp; R^{T}
+\end{array}\right]=\left[\begin{array}{cc}
+R^{T} &amp; -R^{T} \widehat{p} \\
+0 &amp; R^{T}
+\end{array}\right]=\operatorname{Ad}_{g^{-1}}
+\]</span></p>
+<h2 id="coordinate-transformations">Coordinate transformations</h2>
+<p>Consider the motion of three coordinate frames, A, B, and C. The following relation exists between their velocities: <span class="math display">\[
+v_{ac}^s=v_{ab}^s+Ad_{g_{ab}}v_{bc}^s
+\]</span> or the body velocities: <span class="math display">\[
+v_{ac}^b=Ad_{g_{bc}^{-1}}v_{bc}^b+v_{ab}^b
+\]</span></p>
+<h1 id="wrenches">Wrenches</h1>
+<p>In this section, the forces and moments acting on rigid body is introduced.</p>
+<h2 id="wrenches-definition">Wrenches Definition</h2>
+<p>A generalized force acting on a rigid body consists of a linear component (pure force) and an angular component (pure moment) acting at a point. This force is represented as a vector in <span class="math inline">\(\mathbb{R^6}\)</span>: <span class="math display">\[
+F=\left[               
+  \begin{array}{ccc}   
+    f  \\  
+    \tau \\
+  \end{array}
+\right]
+\]</span> where <span class="math inline">\(f\in\mathbb{R^3}\)</span>, <span class="math inline">\(\tau\in\mathbb{R^3}\)</span>. This definition is named as <strong>wrenches</strong>.</p>
+<p>A simpler and more insightful way to derive the relationship between different wrenches is th use the rigid body velocity.</p>
+<figure>
+<img src="/images/rigidbody/wrenches_transformation.png" alt="wrenches_transformation" /><figcaption aria-hidden="true">wrenches_transformation</figcaption>
+</figure>
+<p>Recall that the dot product of a force and a velocity is a power, the power is a coordinate-independent quality. Because of this, the following holds <span class="math display">\[
+v_B^TF_B=v_C^TF_C
+\]</span> we know that <span class="math inline">\(v_C=Ad_{g_{CB}}v_B\)</span>, and therefore the power can be rewritten as <span class="math display">\[
+v_B^TF_B=v_C^TF_C=(Ad_{g_{CB}}v_B)^T F_C=v_B^T (Ad_{g_{CB}})^T F_C
+\]</span> Since this must hold for all <span class="math inline">\(v_b\)</span>, this simplifies to <span class="math display">\[
+F_B=(Ad_{g_{CB}})^T F_C
+\]</span></p>
 
     </div>
 
@@ -550,7 +716,7 @@ A=(I-e^{\widehat\omega\theta})\widehat\omega+\omega\omega^T\theta
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#rigid-body-motion"><span class="nav-number">1.</span> <span class="nav-text">Rigid Body Motion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rotation-motion"><span class="nav-number">2.</span> <span class="nav-text">Rotation Motion</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#properties-of-r"><span class="nav-number">2.1.</span> <span class="nav-text">Properties of \(R\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#basic-calculation"><span class="nav-number">2.2.</span> <span class="nav-text">Basic Calculation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exponential-coordinates-for-rotation"><span class="nav-number">2.3.</span> <span class="nav-text">Exponential coordinates for rotation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#skew-matrix-and-so3"><span class="nav-number">2.3.1.</span> <span class="nav-text">Skew matrix and \(so(3)\)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rodrigues-formula"><span class="nav-number">2.3.2.</span> <span class="nav-text">Rodrigues formula</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#other-representations-for-rotation"><span class="nav-number">2.3.3.</span> <span class="nav-text">Other representations for rotation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rigid-motion"><span class="nav-number">3.</span> <span class="nav-text">Rigid Motion</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#homogeneous-representation"><span class="nav-number">3.1.</span> <span class="nav-text">Homogeneous representation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#twists"><span class="nav-number">3.2.</span> <span class="nav-text">Twists</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#exponential-coordinates-for-se3"><span class="nav-number">3.2.1.</span> <span class="nav-text">Exponential coordinates for \(SE(3)\)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#se3-to-se3-by-exponential-map"><span class="nav-number">3.2.2.</span> <span class="nav-text">\(se(3)\) to \(SE(3)\) by exponential map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#se3-to-se3-by-logarithm"><span class="nav-number">3.2.3.</span> <span class="nav-text">\(SE(3)\) to \(se(3)\) by logarithm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#screws-a-geometric-description-of-twists"><span class="nav-number">3.3.</span> <span class="nav-text">Screws: a geometric description of twists</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#velocity-of-a-rigid-body"><span class="nav-number">4.</span> <span class="nav-text">Velocity of a Rigid Body</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wrenches"><span class="nav-number">5.</span> <span class="nav-text">wrenches</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#rigid-body-motion"><span class="nav-number">1.</span> <span class="nav-text">Rigid Body Motion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rotation-motion"><span class="nav-number">2.</span> <span class="nav-text">Rotation Motion</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#properties-of-r"><span class="nav-number">2.1.</span> <span class="nav-text">Properties of \(R\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#basic-calculation"><span class="nav-number">2.2.</span> <span class="nav-text">Basic Calculation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exponential-coordinates-for-rotation"><span class="nav-number">2.3.</span> <span class="nav-text">Exponential coordinates for rotation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#skew-matrix-and-so3"><span class="nav-number">2.3.1.</span> <span class="nav-text">Skew matrix and \(so(3)\)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rodrigues-formula"><span class="nav-number">2.3.2.</span> <span class="nav-text">Rodrigues formula</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#other-representations-for-rotation"><span class="nav-number">2.3.3.</span> <span class="nav-text">Other representations for rotation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rigid-motion"><span class="nav-number">3.</span> <span class="nav-text">Rigid Motion</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#homogeneous-representation"><span class="nav-number">3.1.</span> <span class="nav-text">Homogeneous representation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#twists"><span class="nav-number">3.2.</span> <span class="nav-text">Twists</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#exponential-coordinates-for-se3"><span class="nav-number">3.2.1.</span> <span class="nav-text">Exponential coordinates for \(SE(3)\)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#se3-to-se3-by-exponential-map"><span class="nav-number">3.2.2.</span> <span class="nav-text">\(se(3)\) to \(SE(3)\) by exponential map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#se3-to-se3-by-logarithm"><span class="nav-number">3.2.3.</span> <span class="nav-text">\(SE(3)\) to \(se(3)\) by logarithm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#screws-a-geometric-description-of-twists"><span class="nav-number">3.3.</span> <span class="nav-text">Screws: a geometric description of twists</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#velocity-of-a-rigid-body"><span class="nav-number">4.</span> <span class="nav-text">Velocity of a Rigid Body</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#rotation-velocity"><span class="nav-number">4.1.</span> <span class="nav-text">Rotation velocity</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#derivate-of-rotation"><span class="nav-number">4.1.1.</span> <span class="nav-text">Derivate of Rotation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#velocity-of-rotation"><span class="nav-number">4.1.2.</span> <span class="nav-text">Velocity of rotation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rigid-body-velocity"><span class="nav-number">4.2.</span> <span class="nav-text">Rigid body velocity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#coordinate-transformations"><span class="nav-number">4.3.</span> <span class="nav-text">Coordinate transformations</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wrenches"><span class="nav-number">5.</span> <span class="nav-text">Wrenches</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#wrenches-definition"><span class="nav-number">5.1.</span> <span class="nav-text">Wrenches Definition</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
