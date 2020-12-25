@@ -6,7 +6,7 @@
   <link href="https://haocou.github.io/atom.xml" rel="self"/>
   
   <link href="https://haocou.github.io/"/>
-  <updated>2020-11-27T07:00:16.590Z</updated>
+  <updated>2020-12-25T11:01:28.954Z</updated>
   <id>https://haocou.github.io/</id>
   
   <author>
@@ -17,31 +17,50 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>coding</title>
-    <link href="https://haocou.github.io/2020/11/27/coding/"/>
-    <id>https://haocou.github.io/2020/11/27/coding/</id>
+    <title>Ubuntu Configuration</title>
+    <link href="https://haocou.github.io/2020/12/18/ubuntuEnvConfig/"/>
+    <id>https://haocou.github.io/2020/12/18/ubuntuEnvConfig/</id>
+    <published>2020-12-18T06:59:25.000Z</published>
+    <updated>2020-12-25T11:01:28.954Z</updated>
+    
+    <content type="html"><![CDATA[<p>This tutorial is for Ubuntu Environment config.</p><a id="more"></a><h1 id="env-configuration">ENV configuration</h1><p>Description: Ubuntu16.04, Java 11.0.2 (not test in Ubuntu18, ubuntu18 can apt install openjdk-11 and ubuntu 16 default version is openJdk8)</p><ul><li><p>Download the source JDK 11.0.2 and install it using the following command</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk-*</span><br><span class="line">sudo mv jdk* &#x2F;usr</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">##Using update-alternatives to install Java</span><br><span class="line">##This is Oracle Java JDK 11</span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;java java &#x2F;usr&#x2F;jdk-11.*&#x2F;bin&#x2F;java 2</span><br><span class="line"></span><br><span class="line">##Or Oracle Java JDK 8</span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;java java &#x2F;usr&#x2F;jdk1.8.*&#x2F;bin&#x2F;java 2</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">##Config default Java if the system exists 2 version</span><br><span class="line">sudo update-alternatives --config java</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">## Setting the ENV for Java</span><br><span class="line">sudo gedit &#x2F;etc&#x2F;profile.d&#x2F;javajdk.sh</span><br><span class="line"></span><br><span class="line">## Input the variables</span><br><span class="line">export PATH&#x3D;$PATH:&#x2F;usr&#x2F;jdk-11.0.2&#x2F;bin</span><br><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;jdk-11.0.2</span><br><span class="line">export J2SDKDIR&#x3D;&#x2F;usr&#x2F;jdk-11.0.2</span><br><span class="line"></span><br><span class="line">##Then source</span><br><span class="line">source &#x2F;etc&#x2F;profile.d&#x2F;javajdk.sh</span><br></pre></td></tr></table></figure></li><li><p>Install and Crack for Intell Idea IDE</p><p>Download Intell IDE(https://www.jetbrains.com/idea/download/#section=linux).</p></li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf idea*</span><br><span class="line">sudo mv idea* &#x2F;usr</span><br><span class="line">cd &#x2F;usr&#x2F;idea*&#x2F;bin</span><br><span class="line">.&#x2F;idea.sh</span><br></pre></td></tr></table></figure><p>Using the Link to crack the license:</p><p>百度网盘链接: 链接: https://pan.baidu.com/s/1kkPp9BQts-zPYAsgTDoQYA 密码: e7qw</p><p>——</p><p>备用链接: 链接: https://pan.baidu.com/s/12Du0aGGbJ5n-CRCdZKEl3Q 密码: hvcp</p><p>see reference</p><p>https://www.exception.site/article/29</p><h1 id="config-the-ubuntu-system">Config the ubuntu system</h1><ol type="1"><li><p>change the mirror: aliyun recommend.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo  cp   /etc/apt/sources.list   /etc/apt/sources.list.bak</span><br><span class="line">sudo  gedit   /etc/apt/sources.list</span><br><span class="line">http://mirrors.aliyun.com/ubuntu/</span><br><span class="line">sudo apt update</span><br></pre></td></tr></table></figure></li><li><p>Install ROS（http://wiki.ros.org/melodic/Installation/Ubuntu）</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c &#39;. &#x2F;etc&#x2F;lsb-release &amp;&amp; echo &quot;deb http:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ros&#x2F;ubuntu&#x2F; &#96;lsb_release -cs&#96; main&quot; &gt; &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;ros-latest.list&#39;</span><br><span class="line">sudo apt-key adv --keyserver &#39;hkp:&#x2F;&#x2F;keyserver.ubuntu.com:80&#39; --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install ros-melodic-desktop</span><br><span class="line">echo &quot;source &#x2F;opt&#x2F;ros&#x2F;melodic&#x2F;setup.bash&quot; &gt;&gt; ~&#x2F;.bashrc</span><br><span class="line">source ~&#x2F;.bashrc</span><br><span class="line">sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential</span><br><span class="line">sudo apt install python-rosdep</span><br><span class="line">sudo rosdep init</span><br><span class="line">rosdep update</span><br></pre></td></tr></table></figure><p>MayBe some error in rosdep init： add below line to /etc/hosts</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">199.232.96.133 raw.githubusercontent.com</span><br></pre></td></tr></table></figure></li><li><p>Gazebo install</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c &#39;echo &quot;deb http:&#x2F;&#x2F;packages.osrfoundation.org&#x2F;gazebo&#x2F;ubuntu-stable &#96;lsb_release -cs&#96; main&quot; &gt; &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;gazebo-stable.list&#39;</span><br><span class="line">wget https:&#x2F;&#x2F;packages.osrfoundation.org&#x2F;gazebo.key -O - | sudo apt-key add -</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install gazebo9</span><br><span class="line"># For developers that work on top of Gazebo, one extra package</span><br><span class="line">sudo apt-get install libgazebo9-dev</span><br></pre></td></tr></table></figure></li><li><p>Some software should be installed.</p><p>git: sudo apt install git</p></li><li><p>Ide</p><p>c++: Clion</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf Clion*</span><br><span class="line">sudo mv clion* /usr</span><br><span class="line"><span class="built_in">cd</span> /usr/clion-2020.3/bin</span><br><span class="line">./clion.sh</span><br></pre></td></tr></table></figure><p>Java: Intell idea</p><p>see before</p></li></ol>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;This tutorial is for Ubuntu Environment config.&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="ubuntu" scheme="https://haocou.github.io/categories/ubuntu/"/>
+    
+    
+    <category term="system" scheme="https://haocou.github.io/tags/system/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Robot control</title>
+    <link href="https://haocou.github.io/2020/11/27/RobotControl/"/>
+    <id>https://haocou.github.io/2020/11/27/RobotControl/</id>
     <published>2020-11-27T06:59:25.000Z</published>
-    <updated>2020-11-27T07:00:16.590Z</updated>
+    <updated>2020-12-25T10:54:13.331Z</updated>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<p>This tutorials is for robot control, including PID control, force control, hybrid force and position control, impedance control.</p><a id="more"></a><h1 id="robot-dynamics">Robot dynamics</h1><p>Usually, the robot dynamics can be formulated by Lagrange (analysis) or Newton-Euler methods (convenient to calculate). The manipulator dynamics is as follow shown, <span class="math display">\[M(\theta)\ddot{\theta} + C(\theta)\dot\theta + g(\theta)=\tau\]</span> where <span class="math inline">\(M\)</span> is the inertial mass term related to joint angle <span class="math inline">\(\theta\)</span>, <span class="math inline">\(C\)</span> is the carios term, and gravity term, <span class="math inline">\(g\)</span>, is the decomposition to joint space. <span class="math inline">\(\tau\)</span> is the torque attached to each joints.</p><p><strong>Problems:</strong> the dynamics is generally not precise due to friction, assemble error and manufacture error, which requires dynamics calibration. Before that, the kinematics calibration should also be taken.</p><h2 id="easy-controller-case">Easy controller case</h2><h1 id="pid-controller">PID controller</h1><h1 id="impedance-controller">Impedance controller</h1><p><strong>Motivation.</strong> The manipulator is always rigid, which can be used in convey application. However, it will fail in touching fields. For example, the robot want to reach the desire position, the workpiece will provide the force feedback to preventing it, which will lead to the task failure. Therefore, it is critical that the robot can tune its' own pose according to the force dynamically. This may be like compliance control.</p><p>The compliance is divided into 2 parts: Active control (RCC) and Passive control (Impedance control or admittance control). Usually, the admittance control is used in industrial robot due the closed port of industrial robot.</p><p><strong>Theory.</strong> The basic idea is the simulation the second order system of mass, spring and damper. The goal is to let the robot perform the process of 2nd system. The "soft" or "rigid" situation is determined by the coefficient of 2nd system. This problem can be formulated in task space or configuration space. They have the similar theory as the below, <span class="math display">\[M_d\ddot e + D_d\dot e + K_de = F_{ext}\]</span> where <span class="math inline">\(M_d\)</span>, <span class="math inline">\(D_d\)</span>, <span class="math inline">\(K_d\)</span> is desired impedance parameter. <span class="math inline">\(e\)</span> is the position error. <span class="math inline">\(F_{ext}\)</span> is the force produced by environment, which can be express in task space or in joint space. If the controller is in joint space, the extern force <span class="math inline">\(F_{ext}\)</span> should be transformed to the joint space using the transpose of Jacobian Matrix.</p><h2 id="admittance-control">admittance control</h2><p>The basic idea of admittance control is to acquire the position error <span class="math inline">\(e\)</span>. Then, the position error is attached to the desired position. The new desired position is sent to the robot position controller (PID) to control the robot. Finally, the manipulator will exhibit the same dynamic properties as impedance.</p><p>The process is that: <span class="math display">\[\ddot e = M_d^{-1}(F_{ext}-D_d\dot e - K_de)\]</span> Then the Euler or Runge Kuta can be used to solve this equation.</p><p>The experiment conducted by ROS is as follow shown.</p>]]></content>
     
     
-      
-      
-    <summary type="html">
-</summary>
-      
+    <summary type="html">&lt;p&gt;This tutorials is for robot control, including PID control, force control, hybrid force and position control, impedance control.&lt;/p&gt;</summary>
     
     
     
     <category term="Study" scheme="https://haocou.github.io/categories/Study/"/>
     
-    <category term="language" scheme="https://haocou.github.io/categories/Study/language/"/>
+    <category term="Robot" scheme="https://haocou.github.io/categories/Study/Robot/"/>
     
-    <category term="c++" scheme="https://haocou.github.io/categories/Study/language/c/"/>
+    <category term="c++" scheme="https://haocou.github.io/categories/Study/Robot/c/"/>
+    
+    <category term="project" scheme="https://haocou.github.io/categories/Study/Robot/c/project/"/>
     
     
-    <category term="code" scheme="https://haocou.github.io/tags/code/"/>
+    <category term="robot" scheme="https://haocou.github.io/tags/robot/"/>
     
   </entry>
   

@@ -22,20 +22,20 @@
     var CONFIG = {"hostname":"haocou.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Kinematics Forward kinematis.">
+  <meta name="description" content="This tutorials is for robot control, including PID control, force control, hybrid force and position control, impedance control.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kinematics">
-<meta property="og:url" content="https://haocou.github.io/2020/11/27/kinematics/index.html">
+<meta property="og:title" content="Robot control">
+<meta property="og:url" content="https://haocou.github.io/2020/11/27/RobotControl/index.html">
 <meta property="og:site_name" content="Robot World">
-<meta property="og:description" content="Kinematics Forward kinematis.">
+<meta property="og:description" content="This tutorials is for robot control, including PID control, force control, hybrid force and position control, impedance control.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-11-27T06:56:26.000Z">
-<meta property="article:modified_time" content="2020-11-27T06:57:39.828Z">
+<meta property="article:published_time" content="2020-11-27T06:59:25.000Z">
+<meta property="article:modified_time" content="2020-12-25T10:54:13.331Z">
 <meta property="article:author" content="Jack Chou">
 <meta property="article:tag" content="robot">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://haocou.github.io/2020/11/27/kinematics/">
+<link rel="canonical" href="https://haocou.github.io/2020/11/27/RobotControl/">
 
 
 <script id="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>kinematics | Robot World</title>
+  <title>Robot control | Robot World</title>
   
 
 
@@ -191,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://haocou.github.io/2020/11/27/kinematics/">
+    <link itemprop="mainEntityOfPage" href="https://haocou.github.io/2020/11/27/RobotControl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/Jack.jpg">
@@ -204,7 +204,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          kinematics
+          Robot control
         </h1>
 
         <div class="post-meta">
@@ -213,10 +213,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-11-27 14:56:26 / Modified: 14:57:39" itemprop="dateCreated datePublished" datetime="2020-11-27T14:56:26+08:00">2020-11-27</time>
+              <time title="Created: 2020-11-27 14:59:25" itemprop="dateCreated datePublished" datetime="2020-11-27T14:59:25+08:00">2020-11-27</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-25 18:54:13" itemprop="dateModified" datetime="2020-12-25T18:54:13+08:00">2020-12-25</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -227,11 +233,15 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/robot/" itemprop="url" rel="index"><span itemprop="name">robot</span></a>
+                  <a href="/categories/Study/Robot/" itemprop="url" rel="index"><span itemprop="name">Robot</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/robot/kinematics/" itemprop="url" rel="index"><span itemprop="name">kinematics</span></a>
+                  <a href="/categories/Study/Robot/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Robot/c/project/" itemprop="url" rel="index"><span itemprop="name">project</span></a>
                 </span>
             </span>
 
@@ -246,8 +256,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="kinematics">Kinematics</h1>
-<p>Forward kinematis.</p>
+        <p>This tutorials is for robot control, including PID control, force control, hybrid force and position control, impedance control.</p>
+<a id="more"></a>
+<h1 id="robot-dynamics">Robot dynamics</h1>
+<p>Usually, the robot dynamics can be formulated by Lagrange (analysis) or Newton-Euler methods (convenient to calculate). The manipulator dynamics is as follow shown, <span class="math display">\[
+M(\theta)\ddot{\theta} + C(\theta)\dot\theta + g(\theta)=\tau
+\]</span> where <span class="math inline">\(M\)</span> is the inertial mass term related to joint angle <span class="math inline">\(\theta\)</span>, <span class="math inline">\(C\)</span> is the carios term, and gravity term, <span class="math inline">\(g\)</span>, is the decomposition to joint space. <span class="math inline">\(\tau\)</span> is the torque attached to each joints.</p>
+<p><strong>Problems:</strong> the dynamics is generally not precise due to friction, assemble error and manufacture error, which requires dynamics calibration. Before that, the kinematics calibration should also be taken.</p>
+<h2 id="easy-controller-case">Easy controller case</h2>
+<h1 id="pid-controller">PID controller</h1>
+<h1 id="impedance-controller">Impedance controller</h1>
+<p><strong>Motivation.</strong> The manipulator is always rigid, which can be used in convey application. However, it will fail in touching fields. For example, the robot want to reach the desire position, the workpiece will provide the force feedback to preventing it, which will lead to the task failure. Therefore, it is critical that the robot can tune its' own pose according to the force dynamically. This may be like compliance control.</p>
+<p>The compliance is divided into 2 parts: Active control (RCC) and Passive control (Impedance control or admittance control). Usually, the admittance control is used in industrial robot due the closed port of industrial robot.</p>
+<p><strong>Theory.</strong> The basic idea is the simulation the second order system of mass, spring and damper. The goal is to let the robot perform the process of 2nd system. The "soft" or "rigid" situation is determined by the coefficient of 2nd system. This problem can be formulated in task space or configuration space. They have the similar theory as the below, <span class="math display">\[
+M_d\ddot e + D_d\dot e + K_de = F_{ext}
+\]</span> where <span class="math inline">\(M_d\)</span>, <span class="math inline">\(D_d\)</span>, <span class="math inline">\(K_d\)</span> is desired impedance parameter. <span class="math inline">\(e\)</span> is the position error. <span class="math inline">\(F_{ext}\)</span> is the force produced by environment, which can be express in task space or in joint space. If the controller is in joint space, the extern force <span class="math inline">\(F_{ext}\)</span> should be transformed to the joint space using the transpose of Jacobian Matrix.</p>
+<h2 id="admittance-control">admittance control</h2>
+<p>The basic idea of admittance control is to acquire the position error <span class="math inline">\(e\)</span>. Then, the position error is attached to the desired position. The new desired position is sent to the robot position controller (PID) to control the robot. Finally, the manipulator will exhibit the same dynamic properties as impedance.</p>
+<p>The process is that: <span class="math display">\[
+\ddot e = M_d^{-1}(F_{ext}-D_d\dot e - K_de)
+\]</span> Then the Euler or Runge Kuta can be used to solve this equation.</p>
+<p>The experiment conducted by ROS is as follow shown.</p>
 
     </div>
 
@@ -266,12 +295,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/11/27/rigidbody/" rel="prev" title="Rigid Body Motion">
-      <i class="fa fa-chevron-left"></i> Rigid Body Motion
+    <a href="/2020/11/27/kinematics/" rel="prev" title="kinematics">
+      <i class="fa fa-chevron-left"></i> kinematics
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/11/27/RobotControl/" rel="next" title="Robot control">
-      Robot control <i class="fa fa-chevron-right"></i>
+    <a href="/2020/12/18/ubuntuEnvConfig/" rel="next" title="Ubuntu Configuration">
+      Ubuntu Configuration <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -331,7 +360,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#kinematics"><span class="nav-number">1.</span> <span class="nav-text">Kinematics</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#robot-dynamics"><span class="nav-number">1.</span> <span class="nav-text">Robot dynamics</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#easy-controller-case"><span class="nav-number">1.1.</span> <span class="nav-text">Easy controller case</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pid-controller"><span class="nav-number">2.</span> <span class="nav-text">PID controller</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#impedance-controller"><span class="nav-number">3.</span> <span class="nav-text">Impedance controller</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#admittance-control"><span class="nav-number">3.1.</span> <span class="nav-text">admittance control</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
